@@ -203,3 +203,71 @@ done = "beau"
 print(type(done) == bool)
 
 ## apply global functions
+### any
+book_1_read = True 
+book_2_read = False
+
+read_any_book = any([book_1_read, book_2_read])
+print(f"read_any_book = {read_any_book}")
+
+### all
+ingredients_purchased = True
+meal_cooked = False 
+
+ready_to_serve = all([ingredients_purchased, meal_cooked]);
+print(f"ready_to_serve = {ready_to_serve}")
+
+# Number Data Types
+## complex
+num1 = 2+3j
+num2 = complex(2,3)
+
+print(num2.real, num2.imag)
+## built-in functions
+### abs
+num1 = -5.49
+print(abs(num1))
+
+### round
+num1 = abs(num1)
+print(round(num1))   
+#### the second parameter is to set the decimal points precision 
+print(round(5.49, 1)) # 5.5 
+print(round(5.49, 2)) # 5.49
+
+### enum: this is the only way to create constanst in python
+print("\n=== enum ===")
+from enum import Enum
+
+class State(Enum):
+    INACTIVE = 0
+    ACTIVE = 1
+
+#### get assigned value of state
+print(State.ACTIVE.value)
+print(State['ACTIVE'].value) # by square brackets
+print("")
+
+#### get state in string 
+print(State.ACTIVE)
+print(State(1))
+print(State['ACTIVE']) # by square brackets
+
+#### List all the possible values for enum
+print("list(State), len(State)")
+print(list(State), len(State))
+
+### user inputs
+age = input("What is your age? ")
+print("Your age is" + age)
+
+# Lists: are essential python data structure
+print("=== List ===")
+
+## a list can hold different types of values
+
+### slicing
+### append
+### extend a list
+#### +=
+##### put characters of the string as elements
