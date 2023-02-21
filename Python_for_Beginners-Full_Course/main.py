@@ -347,3 +347,24 @@ print(items)
 ##### the elements from position 1 until the end position are replaced
 items[1:] = ["Test1", "Test2"]
 print(items)
+
+### Sorting Lists
+#### TypeError: '<' not supported betwen instances of 'int' and 'str'
+#### items = ["Roger", 1, "Syn", True, "Quincy", 7] 
+##### lower case later: 'beau'
+items = ["Roger", "beau", "Beau", "Quincy"]
+items.sort()
+print(items)
+
+##### No matter lower case and the sort is in-place
+###### If a key function is given, apply it once to each list item and sort them
+###### You can copy a list before sorting 
+# items_ori = items # TODO: will get the sorted list, why?
+items_ori = items[:]
+items.sort(key=str.lower, reverse=True)
+print(f"Sorted items: {items}")
+print(f"Original items: {items_ori}\n")
+
+##### Use global function `sorted` without modifying original list
+print(sorted(items, key=str.lower))
+print(f"Original items after calling sorted function: {items}")
