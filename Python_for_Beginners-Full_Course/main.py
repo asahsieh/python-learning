@@ -258,16 +258,92 @@ print("list(State), len(State)")
 print(list(State), len(State))
 
 ### user inputs
-age = input("What is your age? ")
-print("Your age is" + age)
+default = 37
+age = input("What is your age? ") or default
+print(f"Your age is {age}")
 
 # Lists: are essential python data structure
 print("=== List ===")
 
 ## a list can hold different types of values
+dogs = ["Roger", 1, "Syn", True] 
 
+## check if an item is contained in a list with the "in operator"
+print("Roger" in dogs) # True
+print("Beau" in dogs)  # False
+
+### False on empty list
+dogs = []
+print("Beau" in dogs)  # False
+
+## Reference items in a list by their indexes starting with zero
+dogs = ["Roger", 1, "Syn", True] 
+print(dogs[0])
+### update an item using the same notation
+dogs[2] = "Beau"
+print("Replace \"Syn\" to \"Beau\"")
+print(dogs)
+### you can also use negative number here
+print("==== compare element ====")
+print("Check whether the elements are the same on the index in positive and negative numbers:")
+if dogs[2] == dogs[-1]: 
+    print("The elements are the same:")
+    print(dogs[2])
+else: 
+    print("The elements are different:")
+    print(dogs[2])
+    print(dogs[-1])
+    
 ### slicing
-### append
-### extend a list
+print(dogs[1:3]) # the second number is upper bound; only dogs[1] and dogs[2] are printed 
+print(dogs[0:])  # all elements are printed
+print(dogs[:3])  # elements with index < 3 are printed
+
+### Append
+print("Append \"Judah\" into list")
+print("Length of list is changed from")
+print(len(dogs))
+dogs.append("Judah")
+print("to")
+print(len(dogs))
+print(dogs)
+
+### Extend a list by adding more than one element
+#### by the extend method
+dogs.extend(["Quincy"])
+dogs.extend([7])
+print(dogs)
 #### +=
-##### put characters of the string as elements
+dogs += ["Syd", 8]
+print(dogs)
+##### put characters of the string as elements if you miss bracket
+dogs += "Syd"
+print(dogs)
+
+### Remove an item
+#### by remove() method
+dogs.remove("Syd")
+print(dogs)
+#### pop(): remove the last item from the list 
+####        and it's going to return the last item
+poped_item = dogs.pop()
+print(poped_item)
+print(dogs.pop())
+
+### Add an item in the middle of the list by specific INDEX
+items = ["Roger", 1, "Syn", True, "Quincy", 7] 
+items.insert(2, "Test")
+print(items)
+
+#### Add multiple items by slice
+##### insert elements FROM position 1
+items[1:1] = ["Test1", "Test2"]
+print(items)
+
+##### the list of elements will be treated as an element 
+items[1] = ["Test1", "Test2"]
+print(items)
+
+##### the elements from position 1 until the end position are replaced
+items[1:] = ["Test1", "Test2"]
+print(items)
