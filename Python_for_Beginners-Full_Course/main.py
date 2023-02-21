@@ -368,3 +368,21 @@ print(f"Original items: {items_ori}\n")
 ##### Use global function `sorted` without modifying original list
 print(sorted(items, key=str.lower))
 print(f"Original items after calling sorted function: {items}")
+
+# Tuples
+## Q. Why are tuples noisier than lists?
+### A. Tuples are imMUTEable. # the elements in tuple cannot be modified 
+
+## by ()
+names = ("Roger", "Syd")
+### can be indexed like "list"
+names[0]
+names.index("Roger") # 0
+names[-1]
+len(names)
+print("Roger" in names)
+print(sorted(names))
+
+### extend the tuple
+newTuple = names + ("Tina", "Qnincy") 
+print(newTuple)
