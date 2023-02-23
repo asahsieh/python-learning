@@ -632,3 +632,41 @@ increment = counter()
 print(increment()) # 1
 print(increment()) # 2
 print(increment()) # 3
+
+# Objects
+print("*** Objects ***")
+## `age` now has access to the properties and methods defined for all `int` 
+## objects, this includes for example access to the real and imaginary part of 
+## that number
+age = 8
+print(age.real)
+print(age.imag)
+
+### the number of bits necessary to represent this number in binary notation: 
+###bit_length()
+print(age.bit_length())
+
+## A variable holding a `list` value has access to ** a different set of methods **
+### methods of pin and pop, and the methods available to an object, depend on the type of value
+items = [1, 2]
+items.append(3)
+items.pop()
+
+### The ID global function provided by python lets you inspect the location in memory for a particular object
+print(id(items))
+
+## Some objects are MUTABLE while others are IMMUTABLE that depends on the object ifself, if the object provides methods to change its content then it's mutable, otherwise it's immutable
+## Most type defined by Python are immutable
+### An int is immutable, there are not methods to change its value
+### if you increment the value, it's actually going to create an entirely new value, so it's not going to even be the same object at all, you has to create a whole new one to reassign it
+age = 8
+print(id(age)) # 4311886352
+age = age + 1
+print(id(age)) # 4311886384
+
+### in a dictionary, it would actually be the same object but you could just change different parts of it
+dic = {"Kyle": 1, "Rain": 2}
+print(id(dic))
+dic["Kyle"] = 3
+print(dic)
+print(id(dic)) # the same id
