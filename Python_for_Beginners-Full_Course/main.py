@@ -370,10 +370,13 @@ print(sorted(items, key=str.lower))
 print(f"Original items after calling sorted function: {items}")
 
 # Tuples
+## In mathematics, a tuple (UK: /ˈtuːpəlˌˈtʃuːpəlˌˈtjuːpəl/ TOO-pəl,TSHOO-pəl,TYOO-pel, US: /ˈtuːpəlˌˈtʌpəl/ TOO-pəl, TU-pəl) 
+## is a finite ordered list (sequence) of elements.
+
 ## Q. Why are tuples noisier than lists?
 ### A. Tuples are imMUTEable. # the elements in tuple cannot be modified 
 
-## by ()
+## Syntax: ()
 names = ("Roger", "Syd")
 ### can be indexed like "list"
 names[0]
@@ -386,3 +389,75 @@ print(sorted(names))
 ### extend the tuple
 newTuple = names + ("Tina", "Qnincy") 
 print(newTuple)
+
+# Dictionaries
+## different to list
+### list allow you to create collections of values, 
+### dictionaries allow you to create key value pairs
+
+## Syntax: by curly braces { }
+### key can be any immutable value: string, tuple, etc.
+### the value can be anything you want 
+dog = { "name": "Roger", "age": 8 } # or use single qoute 'name'
+print(dog)
+cat = { newTuple : "Kyle" } # use tuple as key
+print(cat)
+
+## access individual key values
+print(dog["name"])
+print(dog['name'])
+
+### change value stored at a specific index 
+dog["name"] = "Syd"
+print(dog)
+
+### another way to get a specific element: get()
+#### you can add a default value
+print(dog.get("color"))
+print(dog.get("color", "brown"))
+dog = { "name": "Roger", "age": 8, "color": "green" } # or use single qoute 'name'
+
+### Pop out a specific element: pop()
+print(dog.pop("name")) # the "name" is pop
+print(dog) # "name" is not printed
+
+### Pop out the last itme: popitem()
+print(dog.popitem()) # the "color" is pop
+print(dog) # "color" is not printed
+
+## check whether the key is contained in a dictionary: by `in` operator
+print("color" in dog) # False
+print("age" in dog)   # True
+
+## Add a new key value pair to the dictionary
+dog["favorite food"] =  "Meat"
+print(dog)
+
+## Get a list with the keys in the dictionary
+print(dog.keys())
+### To return just the list part instead of `dict_keys` 
+cat = []
+cat = dog.keys() # TypeError: 'dict_keys' object is not subscriptable
+cat = list(dog.keys())
+print(cat[0]) # the first element is printed
+
+### can also get a list with the values
+print(list(dog.values()))
+
+## return all the items in the list: item()
+cat = list(dog.items())
+print(cat)
+print(cat[1])
+
+## you can also check the number of element of a dictionary
+print(len(dog))
+
+## Delete a key value pair
+if 'color' in dog:
+    del dog['color']
+else: 
+    print(f"dog is not in the dictionary: {dog}")
+
+## Copy a dictionary
+dogCopy = dog.copy()
+print(dogCopy)
