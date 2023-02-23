@@ -670,3 +670,35 @@ print(id(dic))
 dic["Kyle"] = 3
 print(dic)
 print(id(dic)) # the same id
+
+# Loops
+print("\n*** Loops ***")
+## while loops
+condition = True
+while condition == True:
+    print("The condition is True")
+    condition = False
+
+count = 0
+while count < 10:
+    print(f"{count}: The condition is True")
+    count += 1
+
+print("After the while loop")
+
+## for loops
+print("\n=== Iterate element in a list ===")
+items = [1, 2, 3, 4]
+for item in items:
+    print(item)
+
+print("\n=== if we want the index of the list, using `enumerate` ===")
+item = ["beau", "syd", "quincy"] 
+for index, item in enumerate(item):
+    print(index, item)
+
+print("\n=== Iterate a specific amount of times using the `range` function ===")
+for item in range(15):
+    print(item)
+
+print("\n*** Loops ***\n")
