@@ -461,3 +461,44 @@ else:
 ## Copy a dictionary
 dogCopy = dog.copy()
 print(dogCopy)
+
+# Sets
+## Sets kind of work like tuples but they're NOT ordered and
+## immutable, so you can change them.
+##
+## You can also say that they kind of work like Dictionary but
+## they don't have keys.
+##
+## They have an immutable version of a set called a "frozen set"
+##
+
+### Syntax: { } 
+
+### Sets work well when you think about them as mathematical sets
+set1 = {"Roger", "Syd"}
+set2 = {"Roger"}
+
+#### intersect
+intersect = set1 & set2
+print(intersect)
+
+#### a union of two sets
+##### mod for modification
+set2 = {"Luna"}
+mod = set1 | set2
+print(mod)
+
+#### check difference by minus '-'
+minus = set1 - set2
+print(minus)
+
+#### check whether a set is a superset of another 
+print(set1 > set2) # False
+set2 = {"Roger"}
+print(set1 > set2) # True 
+
+### len/list/in can also be used
+
+### ** A set cannot have two of the same item **
+set1.add("Roger") 
+print(set1) # only one "Roger" will be printed
