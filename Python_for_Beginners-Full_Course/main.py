@@ -502,3 +502,133 @@ print(set1 > set2) # True
 ### ** A set cannot have two of the same item **
 set1.add("Roger") 
 print(set1) # only one "Roger" will be printed
+
+# Function
+## create a set of instructions that we can run when needed
+### a function can accept one or more parameters 
+#### Parameters: the value accepted by the function and inside the function definition 
+def hello():
+    print('hello!')
+
+hello() 
+hello()
+hello()
+
+### also an argument can have a default value that's applied if the argument is not specified
+### arguments are the values we pass to the function when we call it
+def hello1(name="my friend", age=37):
+    print("Hello " + name + " you are " + str(age) + " years old" + '!')
+
+hello1()
+hello1("Beau", 18)
+
+## parameters are passed by reference, all types in python are objects
+## but some of them are immutable, including `integers`, `booleans`, 
+## `floats`, `strings` and `tuples`
+
+### passed by value
+def change(value):
+    value = 2
+
+val = 1
+change(val)
+print(val)
+
+### passed by reference 
+def pass_by_ref(value):
+    #value = 2 # do not change the value in passed list
+    value[0] = 2
+
+val = [1] 
+pass_by_ref(val)
+print(val)
+
+## return a value by return statement
+### have the return statement in a conditional so that's a common way to
+### end a function if the starting condition is not met
+def hello3(name):
+    if not name:
+        return
+    print("Hello " + name + '!')
+hello3(False) # nothing to print
+hello3("ASa")
+
+### you can also return multiple values
+#print(hello4("Syd")) # NameError: name 'hello4' is not defined
+def hello4(name):
+    return name, "Beau", 8
+
+print(hello4("Syd")) # NameError: name 'hello4' is not defined
+
+## Variable scope
+### Variable is visible in parts of your program depending on where you declare it
+
+#### Global variable: if you declare a variable outside a function, 
+#### the variable is visible to any code running after the declaration including functions 
+age_g = 8
+print(age_g)
+def test():
+    #### Local variable: the variable is declared inside a function
+    age_l = 8
+    age_g = 16
+    print(age_g) # 16 in test()
+
+test()
+print(age_g) # the var age_g is used by value in test(), so the value is still 8
+# print(age_l) # Error: "age_l" is not defined. Because it's a local variable of test() 
+
+## (*) Nested Functions
+### A function defined inside a function is visible only inside that function
+### This is useful to create utilites that are useful to a function but not useful outside of it
+#### Kyle: like `protected` method in a class
+#### Benefit: we can make use of `closures` which we'll talk more about later
+def talk(phase):
+    def say(word):
+        print(word)
+
+    words = phase.split(' ')
+    for word in words:
+        say(word)
+
+talk('I am going to buy the milk')
+print()
+
+### If you want to access a variable defined in the outer of function from the inner function: use `nonlocal`
+#### `nonlocal` is especially useful with Closures
+def count():
+    count = 0
+
+    def increment():
+        nonlocal count
+        count += 1
+        print(count)
+
+    increment()
+
+count()
+print()
+## Closures 
+### closure is a special way of doing a function in python if you RETURN A 
+### NESTED FUNCTION that nested function has access to the variable defined in 
+### that function even if that function is not (?)active anymore
+print("*** Closures ***")
+def counter():
+    count = 0
+
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+
+    return increment # RETURN A NESTED FUNCTION
+
+# Instead of just calling the function directly the outer function,
+# assign the other function to a variable as the nested function 
+increment = counter() 
+
+# The count will not be reset to zero on each call
+# We return the increment inner function and has access to the state of the 
+# count variable even though the counter function has ended
+print(increment()) # 1
+print(increment()) # 2
+print(increment()) # 3
