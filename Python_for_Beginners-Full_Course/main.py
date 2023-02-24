@@ -744,7 +744,7 @@ print("*** Classes ***\n")
 
 # Modules
 print("*** Modules ***")
-## every python file is a module, you can import a module from other files and that's the base of any program of moderate complexity as it promotes a sensible organizaition and code reuse
+## **every python file is a module**, you can import a module from other files and that's the base of any program of moderate complexity as it promotes a sensible organizaition and code reuse
 ## In the typical python program, one file acts as the entry point and other files are modules and exposed functions
 import cat
 cat.meow() # scope is under cat
@@ -752,5 +752,36 @@ cat.meow() # scope is under cat
 ## We can also use the from import syntax and call the function directly
 from cat import meow
 meow() # scope is under meow()
+
+## And importing depends on the location of the file in the file system
+## e.g., `cat2.py` under a subfolder `lib`
+from lib import cat2
+cat2.meow() 
+
+### or you can reference the cat2 module specific function by importing from lib.cat2
+from lib.cat2 import meow
+meow()
+
+## The python standard library: basically there's all these pre-built modules, you can load a lot of code from standard library
+### math for math utilities
+### re for regular expressions
+### json to work with JSON
+### datetime to work with dates
+### sqlite3 to use SQLite
+### os for Operating System utilities
+### random for random number generation
+### statistics for statistics utilities
+### requests to perform HTTP network requests
+### http to create HTTP servers
+### urllib to manage URLS
+
+### Use `math` as an example
+print("=== Use math.sqrt in two ways ===")
+import math
+print(math.sqrt(4))
+
+#### or
+from math import sqrt
+print(sqrt(4))
 
 print("*** Modules ***\n")

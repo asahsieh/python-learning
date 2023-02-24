@@ -1,2 +1,2 @@
 def meow():
-    print("Meow!")
+    print("Meow in cat.py!")
