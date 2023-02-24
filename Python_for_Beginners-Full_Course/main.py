@@ -702,3 +702,42 @@ for item in range(15):
     print(item)
 
 print("\n*** Loops ***\n")
+
+## Break and Continue
+print("continue on item == 2")
+items = [1, 2, 3, 4]
+for item in items:
+    if (item == 2):
+        continue
+    print(item)
+
+print("break on item == 2")
+for item in items:
+    if (item == 2):
+        break
+    print(item)
+
+# Classes
+print("\n*** Classes ***")
+##inheritance
+class Animal:
+     def walk(self):
+         print("Walking...")
+
+## definition
+class Dog(Animal):
+    ### constructor
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def bark(self):
+        print(str(self.name) + " is " + str(self.age) + " years old, " + "woof!")
+
+## instantiate
+roger = Dog("Roger", 8)
+print(type(roger))
+print(str(roger.name) + " " + str(roger.age))
+print(roger.bark()) # "None" is printed because bark() has no return statement
+roger.walk()
+print("*** Classes ***\n")
