@@ -741,3 +741,16 @@ print(str(roger.name) + " " + str(roger.age))
 print(roger.bark()) # "None" is printed because bark() has no return statement
 roger.walk()
 print("*** Classes ***\n")
+
+# Modules
+print("*** Modules ***")
+## every python file is a module, you can import a module from other files and that's the base of any program of moderate complexity as it promotes a sensible organizaition and code reuse
+## In the typical python program, one file acts as the entry point and other files are modules and exposed functions
+import cat
+cat.meow() # scope is under cat
+
+## We can also use the from import syntax and call the function directly
+from cat import meow
+meow() # scope is under meow()
+
+print("*** Modules ***\n")
