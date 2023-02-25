@@ -372,6 +372,7 @@ print(f"Original items after calling sorted function: {items}")
 # Tuples
 ## In mathematics, a tuple (UK: /ˈtuːpəlˌˈtʃuːpəlˌˈtjuːpəl/ TOO-pəl,TSHOO-pəl,TYOO-pel, US: /ˈtuːpəlˌˈtʌpəl/ TOO-pəl, TU-pəl) 
 ## is a finite ordered list (sequence) of elements.
+print("***** Tuples *****")
 
 ## Q. Why are tuples noisier than lists?
 ### A. Tuples are imMUTEable. # the elements in tuple cannot be modified 
@@ -379,7 +380,7 @@ print(f"Original items after calling sorted function: {items}")
 ## Syntax: ()
 names = ("Roger", "Syd")
 ### can be indexed like "list"
-names[0]
+print(names[0])
 names.index("Roger") # 0
 names[-1]
 len(names)
