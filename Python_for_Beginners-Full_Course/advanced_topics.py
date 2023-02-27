@@ -173,6 +173,15 @@ def increment(n):
 print(help(increment))
 
 ## for a class
+### It's also common to add docs place a doc string at the top of the file 
+### by multiple line docstring
+"""Dog module
+
+This module does ... bla bla bla and provides the following classes:
+
+- Dog
+...
+"""
 class Dog:
     ### constructor
     def __init__(self, name, age):
@@ -186,3 +195,94 @@ class Dog:
 
 print(help(Dog))
 print("**********************\n")
+
+# Annotations
+## Python is dynamically typed, so we do not have to specify the type of a variable or function parameter or a function return value
+## Annotations allow us to optionally do that, so if we want to actually show what type we're expecting for different values.
+## Python will actually ignore annotations, a separate tool called `mypi` can be run standalone or integrated by IDEs to automatically check for type errors statically while you're coding
+
+### We make this function only accept an int
+def increment_int(n: int) -> int:
+    return n + 1
+
+### Add an annotation to make the `count` variable be an int
+count: int = 0
+
+# Exceptions
+## For exception handling you would wrap lines of code in a `try` block and then
+## inside the block you'll put the lines of code.
+## And then if an error occurs, python will alert you and you can determine which kind of error occurred using an accept block 
+print("***** Exceptions *****")
+
+## template
+# try:
+#     # some lines of code
+# except <ERROR1>:
+#     # handler <ERROR1>
+# except <ERROR2>:
+#     # handler <ERROR2>
+# except:
+#     # catch all exceptions using an except without an error type
+# else: 
+#     # no exceptions were raised, the code ran successfully 
+# finally:
+#     # always run at the end whether or not there are exceptions or no exceptions
+
+### Example: get the error of "ZeroDivisionError: division by zero"
+# result = 2 / 0
+# print(result)
+
+# Use `finally` to recover gracefaully and move on with the program 
+try:
+    result = 2 / 0
+except ZeroDivisionError:
+    print('Cannot divid by zero!')
+finally:
+    result = 1
+
+print("result = " + str(result)) # 1
+
+## You can Raise an Exception intentionally
+## the program will be stoped
+# raise Exception('An error!')
+
+### or intercept it by the try block and it's not stopping our program 
+try: 
+    raise Exception('An error!')
+except Exception as error:
+    print(error)
+
+## You can also define your own exception class extending from exception
+class DogNotFoundExpception(Exception):
+    # `pass` here just means nothing and we must use it when we define a class without methods or a function without code
+    print("inside")
+    pass
+
+try:
+    raise DogNotFoundExpception()
+except DogNotFoundExpception:
+    print('Dog not found!')
+
+### `with` statement
+### is very helpful to simplify working with exception handling
+
+#### for example when working with files, each time we open a file we must remember to close it. `with` makes the process more transparent 
+
+##### An example to open/close file without the `with` statement 
+filename = './test.txt'
+
+try:
+    # file = open(filename, 'r')
+    # content = file.read()
+    # print(content)
+
+    ## An alternate way by `with`
+    ## It's going to make sure to automatically close the file at the end
+    with open(filename, 'r') as file:
+        content = file.read()
+        print(content)
+except FileNotFoundError as error:
+    print("File not found!")
+finally:
+    file.close()
+print("**********************")
