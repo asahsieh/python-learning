@@ -62,7 +62,7 @@ print(multiply(2, 4))
 ## The utility of lambda functions comes when combined with other python functionality: in combination with map filter and reduce
 print("*** Global functions: map(), filter(), reduce() ***")
 
-### map() : run a functio upon each item in a iterable item like a list and 
+### map() : run a functio upon each item in a iterable item like a list 
 print("=== map() ===")
 
 ### create a new list with the same number of items but the values of each item can be changed
@@ -286,3 +286,99 @@ except FileNotFoundError as error:
 finally:
     file.close()
 print("**********************")
+
+# pip: third-party package
+#
+# The modules are all collected in a single place called the "python package index" which is available at pypi.org, and they can be installed on the system using `pip`
+
+## Commands: $ pip install <package>
+##  upgrade: $ pip install -U <package>
+##           $ pip uninstall <package>
+##           $ pip show <package>
+
+# List Compressions
+#
+# A way to create lists in a very concise way
+
+print("***** List Compressions *****")
+numbers = [1, 2, 3, 4, 5]
+
+## sometimes preferred over loops as it's more readable when the operation can be written on a single line
+numbers_power_2 = [n**2 for n in numbers]
+
+print(f"numbers: {numbers}")
+print(f"numbers_power_2: {numbers_power_2}")
+
+## This is how you would do it with a loop
+## We take a few lines to do
+numbers_power_2 = []
+for n in numbers:
+    numbers_power_2.append(n**2)
+
+## You can do the same thing with map as well
+numbers_power_2 = list(map(lambda n : n**2, numbers))
+print(f"numbers_power_2 by `map`: {numbers_power_2}")
+print("*****************************\n")
+
+# Polymorphism generalizes a functionality, so it can work on different types
+# On functions
+print("***** polymorphism *****")
+
+## Example: `cat` function on different classes
+##
+### Code in the basic_topics will be executed
+## from basic_topics import Animal 
+class Animal:
+    def walk(self):
+        print("Walking...")
+
+class Dog(Animal):
+    def walk(self):
+        print('Dog walks')
+
+class Cat(Animal):
+    def walk(self):
+        print('Cat walks') 
+
+animal = Dog()
+animal.walk()
+animal = Cat()
+animal.walk()
+
+print("************************\n")
+
+# Operator Overloading
+#
+# Make classes comparable and to make them work with python operators
+
+print("***** Operator Overloading *****")
+
+## An example that we want to compare age of Dogs by __gt__ function
+class Dog(Animal):
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    # `other` is used to specify other object to compare 
+    def __gt__(self, other):
+        return True if self.age > other.age else False
+
+roger = Dog('Roger', 8)
+syd = Dog('Syn', 9)
+
+print(roger > syd)
+
+### Different arithmetic operators 
+#### __add__() respond to the + operator
+#### __sub__() respond to the - operator
+#### __mul__() respond to the * operator
+#### __truediv__() respond to the / operator
+#### __flodrdiv__() respond to the // operator
+#### __mod__() respond to the % operator
+#### __pow__() respond to the ** operator
+#### __rshift__() respond to the >> operator
+#### __lshift__() respond to the << operator
+#### __and__() respond to the & operator
+#### __or__() respond to the | operator
+#### __xor__() respond to the ^ operator
+
+print("********************************\n")
