@@ -10,6 +10,21 @@ References
 
 import random
 
+# Card class 
+class Card:
+    # Set self.suit to equal hearts
+    def __init__(self, suit, rank) -> None:
+        self.suit = suit
+        self.rank = rank 
+
+    # It's called when print is invoked on an object from the calss 
+    ## return a string
+    ### We want to make it so when we print an object from the card class, it will print something like 10 of hearts, or 3 of clubs, etc.  
+    def __str__(self) -> str:
+        #return self.rank["rank"] + " of " + self.suit
+        # by f-string to put the variables right within the string
+        return f"{self.rank['rank']} of {self.suit}"
+
 # Define classes that will be used in order to separate out different aspects of the game
 ## Classes provide a way of bundling data and functionality together
 ## We're going to use classes to model three parts of the game 
@@ -40,7 +55,9 @@ class Deck:
         # cards should be suits x ranks, total of 52 items or cards
         for suit in suits:
             for rank in ranks:
-               self.cards.append([suit, rank])
+                # Create and append an instance of the card class and
+                # afterwards when a deck is created, it's filled with cards
+                self.cards.append(Card(suit, rank))
     
     # To shuffled the cards by the `random` module
     ## random.shuffle(x): Shuffle the sequence x in place.
@@ -88,11 +105,16 @@ deck2 = Deck()
 deck2.shuffle()
 
 # not shuffled
-print(deck1.cards)
+print("***** Deck without shuffled *****")
+print(deck1.cards[0])
 
 print(deck2.cards)
 
 # Let's add safeguards to prevent errors every time the `deal` function is called, a card is removed from the cards list.
  
 card = deck2.deal(1)
-print(f"\ndealt card: {card}")
+print(f"\ndealt card: {card}\n")
+
+print("***** Test object of class Card *****")
+card1 = Card("heart", {"rank": "K", "value": 10})
+print(card1)
