@@ -8,7 +8,14 @@ References
 - https://www.hopenglish.com/a-deck-of-cards
 """
 
-suit = "hearts"
+suits = ["spades", "hearts", "diamonds", "clubs"] 
+suit = suits[2]
 rank = "K"
 value = 10
 print("your card is: " + rank + " of " + suit)
+
+# Add another item to the suits list
+suits.append("snakes")
+
+for suit in suits:
+    print(suit) 
