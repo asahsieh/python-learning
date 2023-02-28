@@ -12,7 +12,21 @@ import random
 
 cards = [] 
 suits = ["spades", "hearts", "diamonds", "clubs"] 
-ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+ranks = [
+        {"rank": "A", "value": 11},
+        {"rank": "2", "value": 2},
+        {"rank": "3", "value": 3},
+        {"rank": "4", "value": 4},
+        {"rank": "5", "value": 5},
+        {"rank": "6", "value": 6},
+        {"rank": "7", "value": 7},
+        {"rank": "8", "value": 8},
+        {"rank": "9", "value": 9},
+        {"rank": "10", "value": 10},
+        {"rank": "J", "value": 10},
+        {"rank": "Q", "value": 10},
+        {"rank": "K", "value": 10}
+    ]
  
 # cards should be suits x ranks, total of 52 items or cards
 for suit in suits:
@@ -61,39 +75,14 @@ def deal_ref(number):
     return cards_dealt
 
 shuffle()
-card = deal()
-print(card)
-cards_dealt = deal_ref(2)
-print(cards_dealt)
-
-# Let's seperate out the rank part of a single card
-card = cards_dealt[0]
-rank = card[1]
-# print(rank)
-
-## Each rank has a different value in blackjack, we need to set value to rank
-### "A" is 11 or 1, we'll get to the one part later
-### "J", "Q", "K" is 10
-### the numbers have the value of the number
-###
-### This is the perfect time for a `conditional statement`
-
-# Remember to use two equal signs instead fo one equal sign here 
-if rank == "A":
-    value = 11
-elif rank == "J" or rank == "Q" or rank == "K":
-    value = 10
-else:
-    value = rank 
-
-# When that multiple values in a print statement are listed with a comma separating them, both values are printed with a space in between
-print(rank, value)
-
-# Use a `dictionary` to be more general, you can think of a dictionary as a mapping between a set of indices which are called keys and values
-print("\n***** A dictionary for pairing rank and value *****")
-
-rank_dict = {"rank": rank, "value": value}
-
-print(rank_dict["rank"], rank_dict["value"])
 
 # Refactor the code to get the value of each rank without using an if statement
+## A new variable called `card` and assign to the card variable a single card that will deal from the deck but we'll make sure that card is not in a list 
+## Change 
+
+# A little tricky that dealing one card but to get the first item, it's going to the only item in the list 
+card = deal_ref(1)[0]
+print(card)
+
+# to print value only
+print(f"value: {card[1]['value']}")
