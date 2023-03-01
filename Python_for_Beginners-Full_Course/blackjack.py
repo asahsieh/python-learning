@@ -100,21 +100,77 @@ class Deck:
 
         return cards_dealt
 
-deck1 = Deck()
-deck2 = Deck()
-deck2.shuffle()
-
-# not shuffled
-print("***** Deck without shuffled *****")
-print(deck1.cards[0])
-
-print(deck2.cards)
-
-# Let's add safeguards to prevent errors every time the `deal` function is called, a card is removed from the cards list.
+# Hand class
+#
+# In this blackjack game, there will be a human controlled player and a program controlled dealer
+## So, let's add a dealer parameter in the init constructor method
+## Dealer should be set to true or false to keep track of what type of hand it is 
+# 
+# Methods:
+## calculate_value
+### calculate the value of a hand
  
-card = deck2.deal(1)
-print(f"\ndealt card: {card}\n")
+class Hand:
+    def __init__(self, dealer=False) -> None:
+        self.cards = []
+        self.value = 0
+        self.dealer = dealer 
 
-print("***** Test object of class Card *****")
-card1 = Card("heart", {"rank": "K", "value": 10})
-print(card1)
+    def add_card(self, card_list):
+        self.cards.extend(card_list)
+    
+    def calculate_value(self):
+        self.value = 0
+        has_ace = False
+
+        for card in self.cards:
+            self.value += int(card.rank["value"])
+            if card.rank["rank"] == "A":
+                has_ace = True
+        
+        # After this entire for loop, We're going to check if the card has an ace and if the value is over 21, if so, then we'll just subtract 10 from the value, because that'll be the same as setting the ace to equal one instead of 11.
+        if has_ace and self.value > 21:
+            self.value -= 10
+
+    def get_value(self):
+        # calculate the value before we return the value
+        self.calculate_value()
+        return self.value
+
+    # Total value is 21 
+    def is_blackjack(self) -> bool:
+        # if self.get_value() == 21:
+        #     print("You have a blackjack, congratulations!")
+        #     return True
+        # elif self.get_value() > 21:
+        #     print("Oops! There's Bust.")
+        #     return False 
+        # else: 
+        #     print("Great! The total value smaller than 21.")
+        #     return False 
+        return self.get_value() == 21 
+
+    def display(self, show_all_dealer_cards=False):
+        # Use three single quotes to use double qoutes and single quotes within this string
+        print(f'''{"Dealer's" if self.dealer else "Your"} hand:''')
+
+        # The first card should display as hidden
+        ## We're going to need to get access to the card index
+        for index, card in enumerate(self.cards):
+            if index == 0 and self.dealer \
+            and not show_all_dealer_cards and not self.is_blackjack():
+                print("hiddle")
+            else:
+                print(card)
+
+        if not self.dealer:
+            print("Value: ", self.get_value())
+
+deck = Deck()
+deck.shuffle()
+
+hand = Hand()
+hand.add_card(deck.deal(2))
+# for card in hand.cards:
+#     print(card)
+hand.display()
