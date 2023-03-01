@@ -73,7 +73,7 @@ class Deck:
             print("Only one card, no need to do shuffle.")
    
     ## If you want the deal function to deal more than one card, to refactor the deal function  
-    def deal(self, number):
+    def deal(self, number=1):
         cards_dealt = []
         # For testing the safeguards on IndexError
         #self.cards = []
@@ -165,12 +165,134 @@ class Hand:
 
         if not self.dealer:
             print("Value: ", self.get_value())
+        print()
 
-deck = Deck()
-deck.shuffle()
+class Game:
+    def play(self):
+        game_number = 0
+        games_to_play = 0
 
-hand = Hand()
-hand.add_card(deck.deal(2))
-# for card in hand.cards:
-#     print(card)
-hand.display()
+        # Set games_to_play to be whatever the user inputs after they're asked how many games do you want to play
+        ## make sure the games to play is an `int`
+
+        # There's a potential for an error on puting an character (e.g., 'u'):
+        # ValueError: invalid literal for int() with base 10: 'u'
+        ## Create a try-except block to handle the exception
+
+        # Make the program keep asking the user for a value until the user enters a number
+
+        while games_to_play <= 0:
+            try: 
+                games_to_play = int(input("How many games do you want to play? "))
+            except:
+                print("You must enter a number.")
+
+        # Create number of games to play 
+        while game_number < games_to_play:
+            game_number += 1
+
+            deck = Deck()
+            deck.shuffle()
+
+            player_hand = Hand()
+            dealer_hand = Hand(dealer=True)
+
+            # Add a card to the player's hand that is dealt from the deck and also a add card to the dealer's hand that is dealt from the deck also 
+
+            for i in range(2):
+                player_hand.add_card(deck.deal(1))
+                dealer_hand.add_card(deck.deal(1))
+
+            # Print an asterisk 30 time to make a divder
+            # print("******************************")
+            ## A trick to printing something a lot of times
+            print("*" * 30)
+
+            # Print the current game number out of the total number of games
+            # like game 4 of 10
+            print(f"Game {game_number} of {games_to_play}")
+
+            print("*" * 30)
+            player_hand.display()
+            dealer_hand.display()
+        
+            # At this point in the game, someone could already have won if they got a blackjack
+            if self.check_winner(player_hand, dealer_hand):
+                # Go on the the next game if there is a winner
+                continue
+
+            # At this point in the game, the player will be able to choose hit or stand
+            ## The player should be able to keep choosing until the value of their hand is over 21.
+            choice = ""
+            while player_hand.get_value() < 21 and choice not in ["s", "stand"]: 
+                choice = input("Please choose 'Hit' or 'Stand' (or H/S): ").lower()
+                print()
+                if choice in ["hit", "h"]:
+                    player_hand.add_card(deck.deal())
+                    player_hand.display()
+
+            if self.check_winner(player_hand, dealer_hand):
+                # Go on the the next game if there is a winner
+                continue
+
+            # Store the value of player's hand in a variable 
+            player_hand_value = player_hand.get_value()
+            dealer_hand_value = dealer_hand.get_value()
+
+            # Dealer should keep drawing card until dealer hand value is more than 17
+            while dealer_hand_value <= 17:
+                dealer_hand.add_card(deck.deal())
+                dealer_hand_value = dealer_hand.get_value()
+
+            dealer_hand.display(show_all_dealer_cards=True)
+
+            if self.check_winner(player_hand, dealer_hand):
+                # Go on the the next game if there is a winner
+                continue
+
+            # Print the final result
+            print("Final Results")
+            print("Your hand:", player_hand_value)
+            print("Dealer's hand:", dealer_hand_value)
+
+            # Call the check winner function one final time
+            ## Pass in the hands like before but this is time we'll add a third argument of True to indicate that the game is over
+            self.check_winner(player_hand, dealer_hand, True)
+        
+        print("\nThanks for playing!")
+
+    def check_winner(self, player_hand, dealer_hand, game_over=False) -> bool:
+        # the game can also end if both players choose not to get more cards. Use `game_over` to specifiy this
+        if not game_over:
+            # Check whether player's hand is greater than 21
+            # If so, we'll print you busted dealer
+            if player_hand.get_value() > 21:
+                print("You busted. Dearler wins! 😭")
+                return True
+            elif dealer_hand.get_value() > 21:
+                print("Dealer busted. You wins! 😄")
+                return True
+            # check whether has blackjack
+            elif dealer_hand.is_blackjack() and player_hand.is_blackjack(): 
+                print("Both players have blackjack! Tie! 😐")
+                return True
+            elif player_hand.is_blackjack():
+                print("You have blackjack. You wins! 😄")
+                return True
+            elif dealer_hand.is_blackjack():
+                print("Dealer have blackjack. Dearler wins! 😭")
+                return True
+        else: 
+            if player_hand.get_value() > dealer_hand.get_value():
+                print("You win! 😄")
+            elif dealer_hand.get_value() > player_hand.get_value():
+                print("Dealer win! 😄")
+            else:
+                print("Tie! 😐")
+            return True
+
+        return False
+
+g = Game()
+g.play()
+
